@@ -1,0 +1,50 @@
+{
+  "ci": {
+    "JAVA_JDK_VERSION": "17",
+    "JAVA_DISTRIBUTION": "corretto",
+    "AWS_ECR_IMAGE_BASE": "amazoncorretto:17",
+    "AWS_ECR_REGISTRY": "381109090072.dkr.ecr.eu-west-1.amazonaws.com",
+    "AWS_ECR_REPOSITORY_NAME": "tmp-test-app-refund",
+    "AWS_REGION": "eu-west-1",
+    "AWS_RESOURCES_COMMON_ACCOUNT_ID": "381109090072",
+    "AWS_RESOURCES_COMMON_DOMAIN": "ancillaries",
+    "AWS_RESOURCES_COMMON_REPOSITORY_FORMAT": "maven",
+    "AWS_RESOURCES_COMMON_REPOSITORY_NAME": "maven-central-store",
+    "AWS_RESOURCES_COMMON_REPOSITORY_LIBRARY_NAME": "java-library-store",
+    "S3_DEPLOY_BUCKET_REPOSITORY_NAME": "NA",
+    "S3_PACKAGE_DISTRIBUTION_FORMAT": "zip",
+    "S3_RELEASE_BUCKET_REPOSITORY_NAME": "java-releases-store-ancillaries",
+    "DYNATRACE_ID":"NA",
+    "DYNATRACE_URL":"NA"
+  },
+  "cd-int": {
+    "AWS_CONTAINER_NAME": "int-tmp-test-app-ecs-service",
+    "AWS_ECR_REGISTRY": "114755563974.dkr.ecr.eu-west-1.amazonaws.com",
+    "AWS_ECR_REPOSITORY_NAME": "images_app/java-service-ecr",
+    "AWS_ECS_CLUSTER": "workflow-test-ecs-cluster",
+    "AWS_ECS_SERVICE": "int-tmp-test-app-ecs-ecs-service",
+    "AWS_REGION": "eu-west-1",
+    "AWS_TASK_DEFINITION": "task_definition.json",
+    "DEPLOYMENT_URL": "https://miweb-integration.com"
+  },
+  "cd-pre": {
+    "AWS_CONTAINER_NAME": "pre-app-java-ecs-service",
+    "AWS_ECR_REGISTRY": "114755563974.dkr.ecr.eu-west-1.amazonaws.com",
+    "AWS_ECR_REPOSITORY_NAME": "images_app/java-service-ecr",
+    "AWS_ECS_CLUSTER": "workflow-test-ecs-cluster",
+    "AWS_ECS_SERVICE": "pre-app-java-ecs-ecs-service",
+    "AWS_REGION": "eu-west-1",
+    "AWS_TASK_DEFINITION": "task_definition.json",
+    "DEPLOYMENT_URL": "https://miweb-preproduction.com"
+  },
+  "cd-prod": {
+    "AWS_CONTAINER_NAME": "prod-app-java-ecs-service",
+    "AWS_ECR_REGISTRY": "114755563974.dkr.ecr.eu-west-1.amazonaws.com",
+    "AWS_ECR_REPOSITORY_NAME": "images_app/java-service-ecr",
+    "AWS_ECS_CLUSTER": "workflow-test-ecs-cluster",
+    "AWS_ECS_SERVICE": "prod-app-java-ecs-ecs-service",
+    "AWS_REGION": "eu-west-1",
+    "AWS_TASK_DEFINITION": "task_definition.json",
+    "DEPLOYMENT_URL": "https://miweb-production.com"
+  }
+}

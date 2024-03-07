@@ -1,0 +1,42 @@
+{
+	"containerDefinitions": [
+		{
+			"name": "tmp-test-app-service-task",
+			"cpu": 0,
+			"portMappings": [
+				{
+					"containerPort": 8080,
+					"hostPort": 8080,
+					"protocol": "tcp"
+				}
+			],
+			"essential": true,
+			"logConfiguration": {
+				"logDriver": "awslogs",
+				"options": {
+					"awslogs-group": "tmp-test-app-cd-group",
+					"awslogs-region": "eu-west-1",
+					"awslogs-stream-prefix": "tmp-test-app"
+				}
+			},
+			"secrets": [{
+				"name": "environment_variable_name",
+				"valueFrom": "arn:aws:secretsmanager:eu-west-1:793354544255:secret:test-secret-name:testSecretNameKey::"
+			}],
+			"environment": [
+				{
+					"name": "AWS_REGION_STATIC",
+					"value": "eu-west-1"
+				}
+			]
+		}
+	],
+	"family": "tmp-test-app-family",
+	"executionRoleArn": "arn:aws:iam::793354544255:role/AWSECSTaskExecutionRole",
+	"networkMode": "awsvpc",
+	"volumes": [],
+	"requiresCompatibilities": ["FARGATE"],
+	"cpu": "256",
+	"memory": "512",
+	"tags": []
+}

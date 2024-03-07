@@ -1,0 +1,29 @@
+# Building arguments that CD pipeline will pass to the 'docker build --build-arg VARIABLE=value' command.
+# Use amazoncorretto:17 or Probe with alpine or another lighter image
+ARG IMAGE_BASE
+
+FROM ${IMAGE_BASE} AS builder
+WORKDIR application
+# Name of jar builded
+ARG DIST_FILE_NAME
+ARG DIST_FOLDER_NAME
+
+# ADD target/template_hexagonal-1.0.jar ms.jar
+ADD ${DIST_FOLDER_NAME}/${DIST_FILE_NAME} ms.jar
+
+RUN java -Djarmode=layertools -jar ms.jar extract
+
+# Clean image for building multi-layer (Works from spring-boot 2.3 to newer versions, older version required a simple strategy)
+# FROM amazoncorretto:17
+FROM ${IMAGE_BASE}
+
+COPY --from=builder application/dependencies/ ./
+COPY --from=builder application/spring-boot-loader/ ./
+COPY --from=builder application/snapshot-dependencies/ ./
+COPY --from=builder application/application/ ./
+
+COPY --from=psk34092.live.dynatrace.com/linux/oneagent-codemodules-musl:java / /
+ENV LD_PRELOAD /opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so
+
+# Setting Spring boot launcher as entrypoint
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]

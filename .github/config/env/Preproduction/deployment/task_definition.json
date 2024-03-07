@@ -1,0 +1,42 @@
+{
+	"containerDefinitions": [
+		{
+			"name": "pre-app-name-service-task",
+			"cpu": 0,
+			"portMappings": [
+				{
+					"containerPort": 3000,
+					"hostPort": 3000,
+					"protocol": "tcp"
+				}
+			],
+			"essential": true,
+			"logConfiguration": {
+				"logDriver": "awslogs",
+				"options": {
+					"awslogs-group": "pre-app-name-cd-group",
+					"awslogs-region": "eu-west-1",
+					"awslogs-stream-prefix": "app-name"
+				}
+			},
+			"secrets": [{
+				"name": "environment_variable_name",
+				"valueFrom": "arn:aws:secretsmanager:region:aws_account_id:secret:my-secret-name:my-key-par-name::"
+			}],
+			"environment": [
+				{
+					"name": "AWS_REGION_STATIC",
+					"value": "eu-west-1"
+				}
+			]
+		}
+	],
+	"family": "pre-app-name-family",
+	"executionRoleArn": "arn:aws:iam::account-id:role/AWSECSTaskExecutionRole",
+	"networkMode": "awsvpc",
+	"volumes": [],
+	"requiresCompatibilities": ["FARGATE"],
+	"cpu": "256",
+	"memory": "512",
+	"tags": []
+}

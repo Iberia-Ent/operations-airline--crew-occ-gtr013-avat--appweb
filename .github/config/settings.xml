@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+	<mirrors>
+		<mirror>
+			<id>${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_REPOSITORY_NAME}</id>
+			<name>${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_REPOSITORY_NAME}</name>
+            <url>https://${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_ACCOUNT_ID}.d.codeartifact.${AWS_REGION}.amazonaws.com/${AWS_RESOURCES_COMMON_REPOSITORY_FORMAT}/${AWS_RESOURCES_COMMON_REPOSITORY_NAME}/</url>
+			<mirrorOf>*</mirrorOf>
+		</mirror>
+
+		<mirror>
+			<id>${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_REPOSITORY_LIBRARY_NAME}</id>
+			<name>${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_REPOSITORY_LIBRARY_NAME}</name>
+            <url>https://${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_ACCOUNT_ID}.d.codeartifact.${AWS_REGION}.amazonaws.com/${AWS_RESOURCES_COMMON_REPOSITORY_FORMAT}/${AWS_RESOURCES_COMMON_REPOSITORY_LIBRARY_NAME}/</url>
+			<mirrorOf>${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_REPOSITORY_NAME}</mirrorOf>
+		</mirror>
+	</mirrors>
+
+	<profiles>
+		<profile>
+			<id>${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_REPOSITORY_FORMAT}</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<repositories>
+				<repository>
+					<id>${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_REPOSITORY_NAME}</id>
+					<url>https://${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_ACCOUNT_ID}.d.codeartifact.${AWS_REGION}.amazonaws.com/${AWS_RESOURCES_COMMON_REPOSITORY_FORMAT}/${AWS_RESOURCES_COMMON_REPOSITORY_NAME}/</url>
+				</repository>
+				<repository>
+					<id>${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_REPOSITORY_LIBRARY_NAME}</id>
+					<url>https://${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_ACCOUNT_ID}.d.codeartifact.${AWS_REGION}.amazonaws.com/${AWS_RESOURCES_COMMON_REPOSITORY_FORMAT}/${AWS_RESOURCES_COMMON_REPOSITORY_LIBRARY_NAME}/</url>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+
+
+	<servers>
+		<server>
+			<id>${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_REPOSITORY_NAME}</id>
+			<username>aws</username>
+			<password>${env.CODEARTIFACT_AUTH_TOKEN}</password>
+		</server>
+		<server>
+			<id>${AWS_RESOURCES_COMMON_DOMAIN}-${AWS_RESOURCES_COMMON_REPOSITORY_LIBRARY_NAME}</id>
+			<username>aws</username>
+			<password>${env.CODEARTIFACT_AUTH_TOKEN}</password>
+		</server>
+	</servers>
+
+</settings>

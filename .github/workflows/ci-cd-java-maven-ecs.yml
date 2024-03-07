@@ -1,0 +1,17 @@
+# Description: Pipeline to build a java maven, using git flow in ecs fargate.
+# Version 1.0
+# Workflow Code: https://github.com/Iberia-Ent/software-engineering--workflow--java-maven--ci--cd-ecs--git-flow
+# Template Code: https://github.com/Iberia-Ent/software-engineering--java-maven--ci--cd-ecs--git-flow--template
+name: CICD_JAVA_MAVEN_ECS
+on: 
+  pull_request:  
+    branches: [ main, develop, staging ]
+    types:  [  opened, synchronize, reopened, closed ]
+  release:
+    types:
+      - created
+
+jobs:
+  JAVA:
+    uses: Iberia-Ent/software-engineering--workflow--java-maven--ci--cd-ecs--git-flow/.github/workflows/ci-cd-java-maven-ecs.yml@v1.0
+    secrets: inherit
